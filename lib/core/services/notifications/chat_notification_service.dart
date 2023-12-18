@@ -59,11 +59,10 @@ class ChatNotificationService with ChangeNotifier {
 
   void _messageHendler(RemoteMessage? msg) {
     if (msg == null || msg.notification == null) return;
-    add(
-      ChatNotification(
-        title: msg.notification!.title ?? 'Não informado',
-        body: msg.notification!.body ?? 'Não informado',
-      ),
+    final newNotification = ChatNotification(
+      title: msg.notification!.title ?? 'Não informado',
+      body: msg.notification!.body ?? 'Não informado',
     );
+    if (!_items.contains(newNotification)) add(newNotification);
   }
 }
